@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Pet Vision AI</title>
+<style>
+body{
+  margin:0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(120deg,#dbeafe,#fef3c7,#fde68a);
+  background-size:400% 400%;
+  animation:bg 12s infinite;
+  text-align:center;
+}
+
+@keyframes bg{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+h1{
+  margin-top:40px;
+  font-size:38px;
+  color:#1e3a8a;
+}
+
+.card{
+  width:460px;
+  margin:90px auto;
+  background:white;
+  padding:40px;
+  border-radius:25px;
+  box-shadow:0 30px 60px rgba(0,0,0,0.2);
+}
+
+input[type=file]{
+  margin-top:15px;
+}
+
+input[type=submit]{
+  margin-top:30px;
+  background:#2563eb;
+  border:none;
+  padding:14px 40px;
+  color:white;
+  border-radius:12px;
+  font-size:17px;
+  cursor:pointer;
+  transition:.3s;
+}
+
+input[type=submit]:hover{
+  background:#1e40af;
+  transform:scale(1.08);
+}
+
+.result{
+  margin-top:25px;
+  font-size:32px;
+  color:#1e40af;
+  font-weight:bold;
+}
+
+footer{
+  margin-top:120px;
+  font-size:13px;
+  opacity:.6;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🐾 Pet Vision AI</h1>
+
+<div class="card">
+  <form method="POST" enctype="multipart/form-data">
+    <input type="file" name="image" required><br>
+    <input type="submit" value="Analyze Image">
+  </form>
+
+  <div class="result">{{ result }}</div>
+</div>
+
+<footer>AI Powered Image Recognition Made by>--------> DEV SHARMA</footer>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+import os
+import cv2
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score, classification_report
+
+IMG_SIZE = 64
+DATA_PATH = "dataset/train"
+
+features = []
+labels = []
+
+print("Loading Images...")
+
+for img in os.listdir(DATA_PATH):
+    try:
+        img_path = os.path.join(DATA_PATH, img)
+        image = cv2.imread(img_path)
+        image = cv2.resize(image, (IMG_SIZE, IMG_SIZE))
+        image = image.flatten()
+
+        if img.startswith("cat"):
+            label = 0
+        else:
+            label = 1
+
+        features.append(image)
+        labels.append(label)
+    except:
+        pass
+
+features = np.array(features) / 255.0
+labels = np.array(labels)
+
+print("Dataset Loaded!")
+
+# Split Data
+X_train, X_test, y_train, y_test = train_test_split(features, labels, test_size=0.2)
+
+# Train SVM
+print("Training SVM...")
+model = SVC(kernel="linear")
+model.fit(X_train, y_train)
+
+# Prediction
+y_pred = model.predict(X_test)
+
+# Result
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print(classification_report(y_test, y_pred))
